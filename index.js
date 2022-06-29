@@ -26,7 +26,7 @@ if (ctx.from.first_name == "Илья") {
   });
 }
 bot.command("compliment", (ctx) => {
-  ctx.reply(compliments[generateInteger]);
+  // ctx.reply(compliments[generateInteger]);
 });
 // Run the bot
 bot.launch();
