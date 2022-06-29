@@ -1,7 +1,7 @@
 const { Telegraf } = require("telegraf"); // import telegraf.js
 const  DATE_DIFF = require("date-diff-js"); //import date-diff.js
 
-const bot = new Telegraf("5557161585:AAHQmcXO-r5iEr6HJnT36BmnkyVOJiVmpUQ");
+const bot = new Telegraf(process.env.BOT_TOKEN);
 
 const compliments = ["Я тебя люблю❤", "Я тебя безумно люблю, малыш❤❤", "Ты мое маленькое солнышко", "Красоточкааа", "Сашенька, ты невероятно красива", "Такая ты милашечка",
   "Карапуз мой маленький", "Ты самая искренняя девушка из всех, что я встречал", "Обожаю тебя", "У тебя такие милые щечки", "От тебя всегда вкусно пахнет", "Ты, кстати, похожа на котеночка))", "Не могу представить жизни без тебя", "Ну ты и соска",
