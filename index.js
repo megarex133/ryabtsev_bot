@@ -49,7 +49,7 @@ bot.command("compliment", (ctx) => {
 // Together command
 bot.command("together", (ctx) => {
   let dateDiff = DATE_DIFF('2021-11-23', 'Y').outputs;
-  ctx.reply("Мы вместе уже " + (dateDiff.years != 0) ? `${dateDiff.years} лет` : '' + (dateDiff.months != 0) ? `${dateDiff.months} месяцев ` : ''
+  ctx.reply("Мы вместе уже " + (dateDiff.years != 0) ? `${dateDiff.years} лет` : '' + (dateDiff.months != 0) ? `${dateDiff.months} месяцев ` : '' +
     (dateDiff.days != 0) ? `${dateDiff.days} дней` : '');
 });
 
