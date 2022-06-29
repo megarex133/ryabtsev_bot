@@ -11,13 +11,14 @@ bot.start((ctx) => {
       "Вот список команд, которые я выполняю:\n /compliment - Сгенерировать твои любимые нежности"
     );
 });
-
-//Help command
-bot.help((ctx) => {
-  ctx.reply(
-    "Вот список команд, которые я выполняю:\n /compliment - Сгенерировать твои любимые нежности"
-  );
-});
+if (ctx.from.first_name == "Илья") {
+  //Help command
+  bot.help((ctx) => {
+    ctx.reply(
+      "Вот список команд, которые я выполняю:\n /compliment - Сгенерировать твои любимые нежности"
+    );
+  });
+}
 bot.command("compliment", (ctx) => {
   ctx.reply("Введи номер учебной группы");
  
