@@ -50,7 +50,7 @@ bot.hears(/люблю/i, (ctx) => {
 bot.hears(/доброе утро/i, (ctx) => {
   bot.telegram.sendMessage(ctx.chat.id, morning[generateInteger(0,morning.length-1)])
 });
-bot.hears(/сладких снов/i, (ctx) => {
+bot.hears(/сладких снов/i || /спокойной ночи/i, (ctx) => {
   bot.telegram.sendMessage(ctx.chat.id, evening[generateInteger(0,evening.length-1)])
 });
 // Run the bot
