@@ -2,12 +2,12 @@ const { Telegraf } = require("telegraf"); // import telegraf.js
 
 const bot = new Telegraf("5557161585:AAHQmcXO-r5iEr6HJnT36BmnkyVOJiVmpUQ");
 
-const compliments = ["Я тебя люблю❤", "Я тебя безумно люблю, малыш❤❤", "Ты мое маленькое солнышко", "Красоточкааа", "Сашенька, ты невероятно красива"];
-function generateInteger(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1) + min);
-}
+// // const compliments = ["Я тебя люблю❤", "Я тебя безумно люблю, малыш❤❤", "Ты мое маленькое солнышко", "Красоточкааа", "Сашенька, ты невероятно красива"];
+// // function generateInteger(min, max) {
+// //   min = Math.ceil(min);
+// //   max = Math.floor(max);
+// //   return Math.floor(Math.random() * (max - min + 1) + min);
+// }
 //Start command
 bot.start((ctx) => {
     ctx.reply(
