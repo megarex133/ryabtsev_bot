@@ -24,7 +24,7 @@ bot.start((ctx) => {
     );
   });
 bot.command("compliment", (ctx) => {
-  ctx.reply(compliments[generateInteger]);
+  ctx.reply(compliments[generateInteger(0,compliments.length)]);
 });
 // Run the bot
 bot.launch();
