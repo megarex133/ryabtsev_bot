@@ -21,6 +21,7 @@ const love = ["Я тебя очень сильно люблю", "Просто б
   "Больше всех тебя люблю"];
 const morning = ["Доброе утро, малыш", "Доброе утро, солнышко", "Доброе утро, котенок", "Доброе утро, карапуз", "Утро доброе, Сашенька"];
 const evening = ["Спокойной ночи, малыш❤❤❤", "Сладких снов, любимая❤❤❤", "Сладких снов, ангелочек мой❤❤❤", "Добрых снов, Сашенька", "Спокойно ночи, родная"];
+const missing = ["И я по тебе очень сильно скучаю", "Уже соскучился по тебе", "Соскучился сильно-сильно"];
 function generateInteger(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
@@ -61,6 +62,9 @@ bot.hears(/сладких снов/i, (ctx) => {
 });
 bot.hears(/спокойной ночи/i, (ctx) => {
   bot.telegram.sendMessage(ctx.chat.id, evening[generateInteger(0,evening.length-1)])
+});
+bot.hears(/скучаю/i, (ctx) => {
+  bot.telegram.sendMessage(ctx.chat.id, missing[generateInteger(0,missing.length-1)])
 });
 // Run the bot
 bot.launch();
