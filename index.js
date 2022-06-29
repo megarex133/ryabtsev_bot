@@ -36,19 +36,23 @@ bot.start((ctx) => {
     );
 });
   //Help command
-  bot.help((ctx) => {
-    ctx.reply(
-      "Вот список команд, которые я выполняю:\n /compliment - Сгенерировать твои любимые нежности\n /together - Сколько мы с тобой вместе"
-    );
-  });
+bot.help((ctx) => {
+  ctx.reply(
+    "Вот список команд, которые я выполняю:\n /compliment - Сгенерировать твои любимые нежности\n /together - Сколько мы с тобой вместе"
+  );
+});
+// Compliment command
 bot.command("compliment", (ctx) => {
   ctx.reply(compliments[generateInteger(0,compliments.length-1)]);
 });
+
+// Together command
 bot.command("together", (ctx) => {
   let dateDiff = DATE_DIFF('2021-11-23', 'Y').outputs;
-  ctx.reply("Мы вместе уже "(dateDiff.years != 0) ? `${dateDiff.years} лет` : '' + (dateDiff.months != 0) ? `${dateDiff.months} месяцев ` : ''
+  ctx.reply("Мы вместе уже " + (dateDiff.years != 0) ? `${dateDiff.years} лет` : '' + (dateDiff.months != 0) ? `${dateDiff.months} месяцев ` : ''
     (dateDiff.days != 0) ? `${dateDiff.days} дней` : '');
 });
+
  //Replys to messages
 bot.hears(/люблю/i, (ctx) => {
   bot.telegram.sendMessage(ctx.chat.id, love[generateInteger(0,love.length-1)])
