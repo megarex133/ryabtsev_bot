@@ -1,4 +1,5 @@
 const { Telegraf } = require("telegraf"); // import telegraf.js
+const  DATE_DIFF = require("date-diff-js"); //import date-diff.js
 
 const bot = new Telegraf("5557161585:AAHQmcXO-r5iEr6HJnT36BmnkyVOJiVmpUQ");
 
@@ -37,11 +38,15 @@ bot.start((ctx) => {
   //Help command
   bot.help((ctx) => {
     ctx.reply(
-      "Вот список команд, которые я выполняю:\n /compliment - Сгенерировать твои любимые нежности"
+      "Вот список команд, которые я выполняю:\n /compliment - Сгенерировать твои любимые нежности\n /together - Сколько мы с тобой вместе"
     );
   });
 bot.command("compliment", (ctx) => {
   ctx.reply(compliments[generateInteger(0,compliments.length-1)]);
+});
+bot.command("together", (ctx) => {
+  let dateDiff = DATE_DIFF('2021-11-23', 'Y').outputs;
+   ctx.reply((dateDiff.years != 0) ? dateDiff.years +' лет ': '' + dateDiff.months +' месяцев ' + dateDiff.days +' дней');
 });
  //Replys to messages
 bot.hears(/люблю/i, (ctx) => {
