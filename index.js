@@ -1,5 +1,9 @@
 const { Telegraf } = require("telegraf"); // import telegraf.js
-const  DATE_DIFF = require("date-diff-js"); //import date-diff.js
+const DATE_DIFF = require("date-diff-js"); //import date-diff.js
+const moment = require("moment");
+require('moment-precise-range-plugin');
+
+
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
@@ -46,9 +50,14 @@ bot.command("compliment", (ctx) => {
   ctx.reply(compliments[generateInteger(0,compliments.length-1)]);
 });
 bot.command("together", (ctx) => {
-  let dateDiff = DATE_DIFF('2021-11-23', 'Y').outputs;
-  ctx.reply(((dateDiff.years != 0) ? dateDiff.years + ' лет ' : '') + ((dateDiff.months != 0) ? dateDiff.months + ' месяцев ' : '')
-    + ((dateDiff.days != 0) ? dateDiff.days + ' дней' : ''));
+  let startDate = moment('2021-11-23','YYYY-MM-DD');
+  let currentDate = moment();
+  let diff = moment.preciseDiff(startDate, currentDate);
+  ctx.reply(diff)
+  // let dateDiff = DATE_DIFF('2021-11-23', 'Y').outputs;
+  // ctx.reply(((dateDiff.years != 0) ? dateDiff.years + ' лет ' : '') + ((dateDiff.months != 0) ? dateDiff.months + ' месяцев ' : '')
+  //   + ((dateDiff.days != 0) ? dateDiff.days + ' дней' : ''));
+
 });
  //Replys to messages
 bot.hears(/люблю/i, (ctx) => {
