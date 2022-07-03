@@ -1,9 +1,4 @@
 const { Telegraf } = require("telegraf"); // import telegraf.js
-const DATE_DIFF = require("date-diff-js"); //import date-diff.js
-const moment = require("moment");
-require('moment-precise-range-plugin');
-
-
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
@@ -23,14 +18,51 @@ const compliments = ["Я тебя люблю❤", "Я тебя безумно л
   "Завидую сам себе, что ты у меня есть"];
 const love = ["Я тебя очень сильно люблю", "Просто безумно люблю тебя", "А я тебя безумно сильно люблю!", "Невероятно сильно люблю тебя", "Люблю тебя по-настоящему",
   "Больше всех тебя люблю"];
+
 const morning = ["Доброе утро, малыш", "Доброе утро, солнышко", "Доброе утро, котенок", "Доброе утро, карапуз", "Утро доброе, Сашенька"];
+
 const evening = ["Спокойной ночи, малыш❤❤❤", "Сладких снов, любимая❤❤❤", "Сладких снов, ангелочек мой❤❤❤", "Добрых снов, Сашенька", "Спокойно ночи, родная"];
+
 const missing = ["И я по тебе очень сильно скучаю", "Уже соскучился по тебе", "Соскучился сильно-сильно"];
+
 function generateInteger(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
+
+// Count days 
+function dateDiff(startingDate, endingDate) {
+  let startDate = new Date(new Date(startingDate).toISOString().substr(0, 10));
+  if (!endingDate) endingDate = new Date().toISOString().substr(0, 10); // need date in YYYY-MM-DD format
+  let endDate = new Date(endingDate);
+  if (startDate > endDate) {
+    var swap = startDate;
+    startDate = endDate;
+    endDate = swap;
+  }
+  let startYear = startDate.getFullYear();
+  let february = (startYear % 4 === 0 && startYear % 100 !== 0) || startYear % 400 === 0 ? 29 : 28;
+  let daysInMonth = [31, february, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+  let yearDiff = endDate.getFullYear() - startYear;
+  let monthDiff = endDate.getMonth() - startDate.getMonth();
+  if (monthDiff < 0) {
+    yearDiff--;
+    monthDiff += 12;
+  }
+  let dayDiff = endDate.getDate() - startDate.getDate();
+  if (dayDiff < 0) {
+    if (monthDiff > 0) monthDiff--;
+    else {
+      yearDiff--;
+      monthDiff = 11;
+    }
+    dayDiff += daysInMonth[startDate.getMonth()];
+  }
+  return ((yearDiff != 0) ? `${yearDiff} лет `: '') +  ((monthDiff != 0) ? `${monthDiff} месяцев `: '') +  ((dayDiff != 0) ? `${dayDiff} дней `: '');
+}
+
 //Start command
 bot.start((ctx) => {
     ctx.reply(
@@ -48,16 +80,14 @@ bot.start((ctx) => {
   });
 bot.command("compliment", (ctx) => {
   ctx.reply(compliments[generateInteger(0,compliments.length-1)]);
-});
+})
+// Together command
 bot.command("together", (ctx) => {
-  let startDate = moment('2021-11-23','YYYY-MM-DD');
-  let currentDate = moment();
-  let diff = moment.preciseDiff(startDate, currentDate);
-  ctx.reply(diff)
-  // let dateDiff = DATE_DIFF('2021-11-23', 'Y').outputs;
-  // ctx.reply(((dateDiff.years != 0) ? dateDiff.years + ' лет ' : '') + ((dateDiff.months != 0) ? dateDiff.months + ' месяцев ' : '')
-  //   + ((dateDiff.days != 0) ? dateDiff.days + ' дней' : ''));
-
+  ctx.reply(`Мы вместе ${dateDiff('2021-11-23',now())}`);
+});
+// Army command
+bot.command("army", (ctx) => {
+  ctx.reply(`До конца сборов осталось ${dateDiff(now(),'2022-07-28')}`);
 });
  //Replys to messages
 bot.hears(/люблю/i, (ctx) => {
@@ -73,6 +103,9 @@ bot.hears(/спокойной ночи/i, (ctx) => {
   bot.telegram.sendMessage(ctx.chat.id, evening[generateInteger(0,evening.length-1)])
 });
 bot.hears(/скучаю/i, (ctx) => {
+  bot.telegram.sendMessage(ctx.chat.id, missing[generateInteger(0,missing.length-1)])
+});
+bot.hears(/соскучилась/i, (ctx) => {
   bot.telegram.sendMessage(ctx.chat.id, missing[generateInteger(0,missing.length-1)])
 });
 // Run the bot
