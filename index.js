@@ -1,6 +1,6 @@
 const { Telegraf } = require("telegraf"); // import telegraf.js
 
-const bot = new Telegraf(process.env.BOT_TOKEN);
+const bot = new Telegraf('5557161585:AAHQmcXO-r5iEr6HJnT36BmnkyVOJiVmpUQ');
 
 const compliments = ["Я тебя люблю❤", "Я тебя безумно люблю, малыш❤❤", "Ты мое маленькое солнышко", "Красоточкааа", "Сашенька, ты невероятно красива", "Такая ты милашечка",
   "Карапуз мой маленький", "Ты самая искренняя девушка из всех, что я встречал", "Обожаю тебя", "У тебя такие милые щечки", "От тебя всегда вкусно пахнет", "Ты, кстати, похожа на котеночка))", "Не могу представить жизни без тебя", "Ну ты и соска",
@@ -83,11 +83,11 @@ bot.command("compliment", (ctx) => {
 })
 // Together command
 bot.command("together", (ctx) => {
-  ctx.reply(`Мы вместе ${dateDiff('2021-11-23',now())}`);
+  ctx.reply("Мы вместе " + dateDiff('2021-11-23',Date.now()));
 });
 // Army command
 bot.command("army", (ctx) => {
-  ctx.reply(`До конца сборов осталось ${dateDiff(now(),'2022-07-28')}`);
+  ctx.reply("До конца сборов осталось " + dateDiff(Date.now(),'2022-07-28'));
 });
  //Replys to messages
 bot.hears(/люблю/i, (ctx) => {
